@@ -1,0 +1,112 @@
+<div class="container">
+<p id="notice"><%= notice %></p>
+<h3><%= link_to "All grades", usergrades_path, class: "btn btn-green form-control" %>
+<h1>Admin Gradebook</h1>
+<h3>Filter by:</h3>
+<%= search_form_for @search do |f| %>
+   <%= f.select :user_name_cont, options_from_collection_for_select(User.all.order(:last_name), :name, :last_name), :prompt => 'All Students', class: "form-control" %>
+   <%= f.select :assignments_name_cont, options_from_collection_for_select(Assignment.all.order(:created_at), :name, :name), :prompt => 'All Assignments', class: "form-control" %>
+    &nbsp Clear All<%= link_to(submissions_path) do %>
+    <i class="material-icons">cancel</i>
+   <% end %>
+   <br><br>
+<div class="actions">
+  <%= f.submit "Filter", class: "form-control btn-primary" %><br>
+
+</div>
+
+  <% end %>
+<br >
+<br>
+<input type='button' id='hideshow' value='Show/Hide Graded Submissions' class="btn btn-primary">
+
+<div class="table-responsive">
+    <table class="table table-striped table-condensed table-hover">
+      <thead>
+        <tr>
+          <th><%= sort_link @search, :user_name, "Student" %></th>
+          <th><%= sort_link @search, :assignments_name, "Assignment" %></th>
+          <th><%= sort_link @search, :created_at, "Date Submitted" %></th>
+          <th><%= sort_link @search, :assignments_deadline, "Due Date" %></th>
+          <th><%= sort_link @search, :score, "Score" %></th>
+          <th>Attached file</th>
+          <th colspan="1"></th>
+        </tr>
+      </thead>
+       <tbody>
+        <% @submissions.each do |submission| %>
+
+        <% if submission.score == nil %>
+         
+             <td><%= link_to [submission.user.name, submission.user.last_name].join(" "), submission %></td>
+          <% for assignment in submission.assignments %>
+            <td><%= assignment.name %></td>
+          <% end %>
+            <td><%= submission.created_at.to_date %>, <%= submission.created_at %></td>
+          <% for assignment in submission.assignments %>
+            <td><%= assignment.deadline %></td>
+          <% end %>
+            <% if submission.score? %>
+              <td style = "color: green !important"><%= submission.score %>/<% for assignment in submission.assignments %><%= assignment.score %> or <%= number_to_percentage(submission.score.to_f * 100 / assignment.score) %><% end %></td>
+            <% else %>
+              <td style = "color: red !important">Not graded yet!</td>
+            <% end %>
+            <% if submission.document? %>
+          <td><a target=_blank href=" <%= submission.document.url %>"><%= submission.document.original_filename %></a></td>
+        <% else %>
+        <td>No Document(s) Attached!</td>
+      <% end %>
+            <td><%= link_to 'Grade', submission %></td>
+                    <td><%= link_to 'Destroy', submission, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
+          </tr>
+        <% end %>
+      <% end %>
+      </tbody>
+    </table>
+  </div><!--responsive table close-->
+<div id="all-grades" style= "display:none">
+  <div class="table-responsive">
+    <table class="table table-striped table-condensed table-hover">
+
+       <tbody>
+        <% @submissions.each do |submission| %>
+          <% if submission.score? %>
+             <td><%= link_to [submission.user.name, submission.user.last_name].join(" "), submission %></td>
+          <% for assignment in submission.assignments %>
+            <td><%= assignment.name %></td>
+          <% end %>
+            <td><%= submission.created_at.to_date %>, <%= submission.created_at %></td>
+          <% for assignment in submission.assignments %>
+            <td><%= assignment.deadline %></td>
+          <% end %>
+            <% if submission.score? %>
+              <td style = "color: green !important"><%= submission.score %>/<% for assignment in submission.assignments %><%= assignment.score %> or <%= number_to_percentage(submission.score.to_f * 100 / assignment.score) %><% end %></td>
+            <% else %>
+              <td style = "color: red !important">Not graded yet!</td>
+            <% end %>
+            <% if submission.document? %>
+          <td><a target=_blank href=" <%= submission.document.url %>"><%= submission.document.original_filename %></a></td>
+        <% else %>
+        <td>No Document(s) Attached!</td>
+      <% end %>
+            <td><%= link_to 'Grade', submission %></td>
+                    <td><%= link_to 'Destroy', submission, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
+          </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div><!--responsive table close-->
+</div>
+
+<br>  
+</div>
+<script>
+jQuery(document).ready(function(){
+        jQuery('#hideshow').on('click', function(event) {        
+             jQuery('#all-grades').toggle('hide');
+        });
+    });
+</script>
