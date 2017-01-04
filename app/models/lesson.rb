@@ -57,5 +57,10 @@ class Lesson < ActiveRecord::Base
   	default_scope { order('date') } 
   	  self.per_page = 14
 
+private
+
+  ransacker :week do
+    Arel.sql("to_char(\"#{table_name}\".\"id\", '99999')")
+  end
 
 end
