@@ -2,16 +2,21 @@
 <p id="notice"><%= notice %></p>
 <div class="col-md-8">
   <h1><%= @tutorial.name %></h1>
+ <% if @tutorial.video? %>
+<div class="video-container">
+  	<%= @tutorial.video.html_safe %>
+ </div>
+ <% end %>
 	<p><%= simple_format @tutorial.content.html_safe %></p>
   
-  <div class="video-container">
-  	<%= @tutorial.video.html_safe %>
-  </div>
   <%= link_to 'Edit', edit_tutorial_path(@tutorial) %> |
 <%= link_to 'Back', tutorials_path %>
+
 </div>
   <div class="col-md-4 projects-right">
+  	
 		<div class="padding-right">
+
 			<h1>What is this tutorial related to?</h1>
 			<p style = "font-size: 1.3rem !important; line-height: 2rem !important">This tutorial or resource is pertinent to:</p>
 			<% for @lesson in @tutorial.lessons %>
@@ -20,6 +25,7 @@
 		     </ul>
       <% end %>
 		</div>
+			
 	</div>
 <br>
 <br>
