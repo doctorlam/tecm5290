@@ -8,6 +8,7 @@ class Lesson < ActiveRecord::Base
 	has_many :learnings
 	has_many :projects, :through => :learnings
 	has_many :presentations, :through => :learnings
+	has_many :presentations, :through => :learnings
 	has_many :assignments, :through => :learnings
 	acts_as_commontable
 	
