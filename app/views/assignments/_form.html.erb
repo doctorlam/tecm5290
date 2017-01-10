@@ -32,6 +32,10 @@
     <%= f.date_select :deadline, class: "form-control" %>
   </div>
    <div class="field">
+    <%= f.label :fake_score, 'Fake Points' %><br>
+    <%= f.number_field :fake_score, class: "form-control" %>
+  </div>
+   <div class="field">
     <%= f.label :score, 'Points' %><br>
     <%= f.number_field :score, class: "form-control" %>
   </div>
