@@ -49,7 +49,7 @@
             <% if submission.score? %>
               <td style = "color: green !important"><%= submission.score %>/<% for assignment in submission.assignments %><%= assignment.score %> or <%= number_to_percentage(submission.score.to_f * 100 / assignment.score) %><% end %></td>
             <% else %>
-              <td style = "color: red !important">Not graded yet!</td>
+              <td style = "color: red !important">Not graded yet (<%= assignment.fake_score %> points</td>
             <% end %>
             <% if submission.document? %>
           <td><a target=_blank href=" <%= submission.document.url %>"><%= submission.document.original_filename %></a></td>
