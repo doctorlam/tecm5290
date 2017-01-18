@@ -479,6 +479,7 @@ input.takeaway {
 	top: 0;
 	left: 0;
 	background: rgba(0,0,0,0.9);
+	z-index: 200;
 }
 
 .overlay label{
@@ -488,7 +489,7 @@ input.takeaway {
 	right: 20px;
 	top: 20px;
 	background: url('http://tympanus.net/Development/FullscreenOverlayStyles/img/cross.png');
-	z-index: 100;
+	z-index: 200;
   cursor:pointer;
 }
 
