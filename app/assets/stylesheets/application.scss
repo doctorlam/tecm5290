@@ -33,6 +33,9 @@
 
 .img-container img, .img-container-discussion img {
 	width: 100%;}
+nav a:hover {
+	background: #1084FF !important;
+}
 nav {
 	z-index: 100 !important;
 }
@@ -479,7 +482,8 @@ input.takeaway {
 	top: 0;
 	left: 0;
 	background: rgba(0,0,0,0.9);
-	z-index: 200;
+		z-index: 200;
+
 }
 
 .overlay label{
