@@ -1,5 +1,7 @@
 class TutorialsController < ApplicationController
   before_action :set_tutorial, only: [:show, :edit, :update, :destroy]
+  before_filter :check_user, only: [:edit, :update, :destroy]
+  before_filter :authorize_admin, only: [:new, :create, :destroy, :edit]
 
   # GET /tutorials
   # GET /tutorials.json
@@ -70,5 +72,11 @@ class TutorialsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def tutorial_params
       params.require(:tutorial).permit(:name, :content, :video, {lesson_ids: []}, :lesson, :lesson_id)
+    end
+     def check_user
+      if current_user == authorize_admin
+        redirect_to root_url, alert: "You don't have permission to do that!"
+      end 
+
     end
 end
