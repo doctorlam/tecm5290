@@ -71,7 +71,7 @@ class TutorialsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tutorial_params
-      params.require(:tutorial).permit(:name, :content, :video, {lesson_ids: []}, :lesson, :lesson_id, :attachment)
+      params.require(:tutorial).permit(:attachment, :name, :content, :video, {lesson_ids: []}, :lesson, :lesson_id)
     end
      def check_user
       if current_user == authorize_admin
