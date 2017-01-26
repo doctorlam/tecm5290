@@ -14,7 +14,8 @@
                 <th>Assignment</th>
                 <th>Date Submitted</th>
                 <th>Due Date</th>
-                <th>Score</th>
+                <th>Score</th> 
+                <th>Comments</th>
                 <th>Attached file</th>
               </tr>
             </thead>
@@ -33,6 +34,7 @@
                 <% end %>
                   <% if submission.score? %>
                     <td style = "color: green"><%= submission.score %>/<%= assignment.score %></td>
+                     <td><%= link_to "View Comments", submission %></td>
                   <% else %>
                     <td style = "color:red">Not graded yet (<%= assignment.fake_score %> points)</td>
                   <% end %>
