@@ -37,6 +37,7 @@
                      <td><%= link_to "View Comments", submission %></td>
                   <% else %>
                     <td style = "color:red">Not graded yet (<%= assignment.fake_score %> points)</td>
+                    <td></td>
                   <% end %>
                   
                   <% if submission.document? %>
