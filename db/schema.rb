@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170120165733) do
+ActiveRecord::Schema.define(version: 20170126165428) do
 
   create_table "abouts", force: :cascade do |t|
     t.text     "name"
@@ -31,12 +31,13 @@ ActiveRecord::Schema.define(version: 20170120165733) do
     t.text     "name"
     t.text     "description"
     t.date     "deadline"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.integer  "submission_id"
     t.integer  "homework_id"
     t.integer  "score"
     t.integer  "fake_score"
+    t.string   "assignment_type"
   end
 
   create_table "classactivities", force: :cascade do |t|
