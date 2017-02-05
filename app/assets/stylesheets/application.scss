@@ -14,6 +14,17 @@
  *= require_self
 *= require commontator/application
 */
+
+.filter-box {
+	border: 1px solid black;
+	margin: 5px 0px 20px 0;
+	padding:10px;
+	border-radius: 5px;
+
+}
+.tutorial-content p {
+	font-size: 20px !important;
+}
 .img-container {
     width: 100px; /* whatever set width */
     height: 100px;
@@ -606,10 +617,10 @@ code {
 	}
 	
 	.navbar a {
-	text-align: center;
+		float: left;
 	}
 	.navbar-fixed-top .navbar-collapse {
-		max-height: 100% !important;
+		min-height: 100vh !important;
 	}
 	.projects-right {
 		margin-bottom: 10px;
